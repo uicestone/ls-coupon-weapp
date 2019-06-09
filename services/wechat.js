@@ -1,4 +1,5 @@
 import store from "../store";
+import * as api from "../common/vmeitime-http";
 
 export const wechatLogin = () =>
   new Promise((resolve, reject) => {
@@ -10,26 +11,15 @@ export const wechatLogin = () =>
         console.log(loginRes);
         uni.getUserInfo({
           provider,
-          success: async infoRes => {
-            console.log(infoRes);
+          success: async userData => {
+            // console.log(userData);
             try {
-              // const data = await wxmini_login_gql({
-              //   code: loginRes.code,
-              //   iv: infoRes.iv,
-              //   encryptedData: infoRes.encryptedData
-              // });
-
-              // const { token, user, userData } = data;
-              // const { session_key } = userData;
-
-              // store.state.auth.session_key = session_key;
-              // store.state.auth.token = token;
-              // store.state.auth.user = user;
-
-              // stroreUser({ user, token });
-              const { userInfo } = infoRes;
+              const res = await api.wechatLogin({ code: loginRes.code });
+              let { userInfo } = userData;
+              userInfo = Object.assign({}, userInfo, res.data);
+              console.log(userInfo);
               stroreUser({ user: userInfo });
-              resolve(infoRes);
+              resolve(userInfo);
             } catch (err) {
               uni.showToast({
                 title: "登录失败",
@@ -52,12 +42,8 @@ export const wechatLogin = () =>
     });
   });
 
-export const stroreUser = ({ user, token } = {}) => {
+export const stroreUser = ({ user } = {}) => {
   try {
-    uni.setStorage({
-      key: "token",
-      data: token
-    });
     store.state.auth.user = user;
   } catch (e) {
     console.error(e);

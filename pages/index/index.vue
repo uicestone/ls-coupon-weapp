@@ -9,9 +9,21 @@
 
 <script>
 import { sync } from "vuex-pathify";
+import { wechatLogin } from "../../services";
+
 export default {
   computed: {
     currentTab: sync("currentTab")
+  },
+  async onLoad() {
+    try {
+      const data = await wechatLogin();
+    } catch (error) {
+      console.error(error);
+      uni.navigateTo({
+        url: "/pages/login"
+      });
+    }
   }
 };
 </script>

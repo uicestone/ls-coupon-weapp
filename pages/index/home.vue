@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { wechatLogin } from "../../services";
 import { sync } from "vuex-pathify";
 
 export default {
@@ -63,16 +62,6 @@ export default {
       // uni.navigateTo({
       //   url: `/pages/user/edit`
       // });
-    }
-  },
-  async mounted() {
-    try {
-      const data = await wechatLogin();
-      this.dev();
-    } catch (error) {
-      uni.navigateTo({
-        url: "/pages/login"
-      });
     }
   }
 };
