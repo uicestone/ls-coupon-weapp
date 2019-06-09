@@ -9,7 +9,8 @@ const state = {
     avatarUrl: "",
     openid: "",
     customer: null
-  }
+  },
+  coupons: []
 };
 
 const mutations = make.mutations(state);

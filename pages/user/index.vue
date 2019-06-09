@@ -12,7 +12,7 @@
             text.cuIcon-edit 完善个人资料
       view.cu-bar.margin-top.bg-white(v-for="(item,index) in coupons" :key="index")
         view.action
-          text.text-lg {{item.text}}
+          text.text-lg {{item.coupon.desc}}
         view.padding
           button.cu-btn.round.bg-red(@click="goCouponDetail(item)") 去使用
 
@@ -21,29 +21,25 @@
 
 <script>
 import { sync } from "vuex-pathify";
+import * as api from "../../common/vmeitime-http";
+
 export default {
   data() {
-    return {
-      coupons: [
-        {
-          id: 0,
-          text: "满100减20"
-        },
-        {
-          id: 1,
-          text: "满200减50"
-        },
-        {
-          id: 2,
-          text: "免费领取1锅汤"
-        }
-      ]
-    };
+    return {};
   },
   computed: {
-    user: sync("auth/user")
+    user: sync("auth/user"),
+    coupons: sync("auth/coupons")
+  },
+  mounted() {
+    this.getCoupons();
   },
   methods: {
+    async getCoupons() {
+      const { openid } = this.user;
+      const res = await api.getCoupons({ openid });
+      this.coupons = res.data;
+    },
     goCouponDetail(item) {
       uni.navigateTo({
         url: `/pages/coupon/detail?id=${item.id}`

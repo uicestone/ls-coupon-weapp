@@ -46,6 +46,32 @@ export const wechatLogin = ({ code }) => {
   });
 };
 
+export const getNearShop = ({ latitude, longitude }) => {
+  return http.request({
+    url: `/ls-coupon/shop?near=${latitude},${longitude}`,
+    method: "GET"
+  });
+};
+
+export const getCoupons = ({ openid }) => {
+  return http.request({
+    url: `/ls-coupon/code?openid=${openid}`,
+    method: "GET"
+  });
+};
+
+export const claimCoupons = ({ couponIds, openid }) => {
+  return http.request({
+    url: `/ls-coupon/code`,
+    method: "POST",
+    dataType: "json",
+    data: {
+      couponIds,
+      openid
+    }
+  });
+};
+
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
   test,

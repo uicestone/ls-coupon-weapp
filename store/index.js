@@ -11,7 +11,11 @@ pathify.options.mapping = "simple";
 
 const state = {
   loading: false,
-  currentTab: "首页"
+  currentTab: "首页",
+  position: {
+    latitude: 0,
+    longitude: 0
+  }
 };
 
 const mutations = make.mutations(state);

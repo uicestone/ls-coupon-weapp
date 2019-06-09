@@ -16,32 +16,20 @@
 
 <script>
 import { sync } from "vuex-pathify";
+import * as api from "../../common/vmeitime-http";
+
 export default {
   data() {
     return {
-      searchText: "",
-      store: {
-        list: [
-          {
-            id: 0,
-            name: "光启店"
-          },
-          {
-            id: 1,
-            name: "五角场店"
-          },
-          {
-            id: 2,
-            name: "星空店"
-          }
-        ]
-      }
+      searchText: ""
     };
   },
   computed: {
-    currentStore: sync("store/currentStore")
+    currentStore: sync("store/currentStore"),
+    position: sync("position"),
+    store: sync("store")
   },
-  async onLoad() {
+  async mounted() {
     try {
       await this.checkLocation();
     } catch (error) {}
@@ -55,13 +43,18 @@ export default {
       });
       this.currentStore = { ...this.currentStore, ...item };
       uni.navigateTo({
-        url: `/pages/store/index`
+        url: `/pages/store/index?id=${item.id}`
       });
     },
     checkLocation() {
       uni.getLocation({
         success: async res => {
-          console.log(res);
+          const { latitude, longitude } = res;
+          this.position = {
+            latitude,
+            longitude
+          };
+          this.getStore();
         },
         fail: async err => {
           uni.showModal({
@@ -71,6 +64,11 @@ export default {
           });
         }
       });
+    },
+    async getStore() {
+      if (!this.position.latitude) return;
+      const res = await api.getNearShop(this.position);
+      this.store.list = res.data;
     }
   }
 };

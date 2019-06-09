@@ -8,7 +8,9 @@ import storeList from "./pages/store/list.vue";
 import storeManage from "./pages/store/manage.vue";
 
 import userIndex from "./pages/user/index.vue";
+import qrcode from "tki-qrcode";
 
+Vue.component("qrcode", qrcode);
 Vue.component("tab-bar", tabbar);
 Vue.component("home", home);
 Vue.component("store-list", storeList);

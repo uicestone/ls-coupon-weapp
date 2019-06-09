@@ -14,7 +14,12 @@
 <script>
 import { sync } from "vuex-pathify";
 
+import tkiQrcode from "tki-qrcode/components/tki-qrcode/tki-qrcode";
+
 export default {
+  components: {
+    tkiQrcode
+  },
   data() {
     return {
       actionList: [
@@ -57,11 +62,6 @@ export default {
       if (item.action) {
         item.action();
       }
-    },
-    dev() {
-      // uni.navigateTo({
-      //   url: `/pages/user/edit`
-      // });
     }
   }
 };

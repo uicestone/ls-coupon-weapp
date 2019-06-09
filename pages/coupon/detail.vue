@@ -1,7 +1,9 @@
 <template lang="pug">
   view
-    view.flex.justify-center
-      text.text-xl.text-red.margin-top-xl 请呼叫店员扫码使用
+    view.text-center
+      view.text-xl.text-red.margin-top-xl 请呼叫店员扫码使用
+      view.margin-top
+        qrcode(ref="qrcode" val="http://www.bilibili.com", :size="200" :onval="false")
 </template>
 
 
@@ -16,6 +18,7 @@ export default {
   },
   onLoad(data) {
     this.detail = data;
+    this.$refs.qrcode._makeCode();
   }
 };
 </script>
