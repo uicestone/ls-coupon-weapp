@@ -32,6 +32,11 @@ export default {
             });
             this.couponDetail = res.data;
             console.log(this.couponDetail);
+            uni.showModal({
+              title: "核销成功",
+              content: this.couponDetail.coupon.desc,
+              showCancel: false
+            });
           }
         }
       });

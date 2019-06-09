@@ -1,10 +1,8 @@
 <template lang="pug">
-  view.cu-bar.margin-top.bg-white.padding-sm.radius.shadow
-    view
-      text {{item.coupon.desc}}
-    view
-      button.cu-btn.round.bg-red(@click="goCouponDetail(item)" :disabled="item.used") 
-        text 去使用
+  view.flex.margin-top.bg-white.padding.radius.shadow.justify-between.align-center
+    view.margin-right {{item.coupon.desc}}
+    button.cu-btn.round.bg-red.sm(@click="goCouponDetail(item)" :disabled="item.used" style="width: 150upx") 
+      text.text-df 使用
 </template>
 
 <script>

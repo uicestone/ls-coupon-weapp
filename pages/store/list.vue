@@ -3,12 +3,12 @@
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
-        input(v-model="searchText" @blur="searchBlur" :adjust-position='false' type='text' placeholder='搜索附近门店' confirm-type='search')
-      view.action
+        input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索附近门店' confirm-type='search')
+      view.action(@click="search")
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view
       view.cu-list.menu.sm-border.card-menu.margin-top
-        view.cu-item(v-for="(item,index) in store.list" :key="index" @click="selectStore(item)")
+        view.cu-item(v-for="(item,index) in _store.list" :key="index" @click="selectStore(item)")
           view.padding
             view 小肥羊{{item.name}}
 </template>
@@ -27,7 +27,13 @@ export default {
   computed: {
     currentStore: sync("store/currentStore"),
     position: sync("position"),
-    store: sync("store")
+    store: sync("store"),
+    _store() {
+      if (this.searchText) {
+        return this.store.list.filter(i => i.name.includes(this.searchText));
+      }
+      return this.store;
+    }
   },
   async mounted() {
     try {
@@ -35,7 +41,9 @@ export default {
     } catch (error) {}
   },
   methods: {
-    searchBlur() {},
+    search() {
+      this.searchText = "";
+    },
     async selectStore(item) {
       uni.setStorage({
         key: "storeId",
