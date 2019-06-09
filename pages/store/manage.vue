@@ -8,12 +8,31 @@
 
 
 <script>
+import * as api from "../../common/vmeitime-http";
+import { sync } from "vuex-pathify";
+
 export default {
+  data() {
+    return {
+      couponDetail: {}
+    };
+  },
+  computed: {
+    user: sync("auth/user")
+  },
   methods: {
     scanQrcode() {
       uni.scanCode({
-        success: function(res) {
-          console.log(res);
+        success: async code => {
+          console.log(code);
+          if (code.result) {
+            const res = await api.checkCoupons({
+              codeString: code.result,
+              openid: this.user.openid
+            });
+            this.couponDetail = res.data;
+            console.log(this.couponDetail);
+          }
         }
       });
     }

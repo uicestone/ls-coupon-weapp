@@ -1,7 +1,8 @@
 <template lang="pug">
   scroll-view
-    view.flex.justify-center
-      text.margin-top-xl.text-xl 恭喜获得优惠券
+    view.text-center.padding(v-if="claimedCoupons.length > 0")
+      view.margin-top-xl.text-xl 恭喜获得优惠券
+      coupon-item(v-for="(item,index) in claimedCoupons" :key="index" :item="item")
     tab-bar.bottom-fixed(redirect)
 </template>
 
@@ -33,8 +34,10 @@ export default {
     async claimCoupons() {
       const { openid } = this.user;
       const couponIds = this.store.currentStore.validCoupons.map(i => i.id);
-      const res = await api.claimCoupons({ openid, couponIds: [1, 2, 3, 5] });
-      this.claimCoupons = res.data;
+      if (couponIds.length > 0) {
+        const res = await api.claimCoupons({ openid, couponIds });
+        this.claimedCoupons = res.data;
+      }
     }
   }
 };

@@ -1,7 +1,7 @@
 <template lang="pug">
   view
     view.cu-bar.tabbar.bg-white
-      view.action(v-for="(item,index) in routes" :key="index" @click="handleRouteChange(item)" :class="[currentTab=== item.name ? 'text-green': '']")
+      view.action(v-for="(item,index) in routes" :key="index" @click="handleRouteChange(item)" :class="[currentTab=== item.name ? 'text-green': '']" v-if="checkTab(item)")
         view(:class="item.icon")
         text {{item.name}}
 </template>
@@ -34,9 +34,18 @@ export default {
     };
   },
   computed: {
-    currentTab: sync("currentTab")
+    currentTab: sync("currentTab"),
+    user: sync("auth/user")
   },
   methods: {
+    checkTab(item) {
+      if (item.name == "管理") {
+        if (!this.user.roles) {
+          return false;
+        }
+      }
+      return true;
+    },
     handleRouteChange(item) {
       this.currentTab = item.name;
       if (this.redirect) {

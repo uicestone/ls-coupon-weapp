@@ -1,4 +1,5 @@
 import http from "./interface";
+import _ from "lodash";
 
 /**
  * 将业务所有接口统一起来便于维护
@@ -16,17 +17,25 @@ export const test = data => {
 		}
 	} */
   //设置请求结束后拦截器
-  http.interceptor.response = response => {
-    console.log("个性化response....");
-    //判断返回状态 执行相应操作
-    return response;
-  };
+
   return http.request({
     baseUrl: "https://ls-coupon.codeispoetry.tech/wp-json/v1",
     url: "ajax/echo/text?name=uni-app",
     dataType: "text",
     data
   });
+};
+
+http.interceptor.response = response => {
+  console.log({ response }, 123123123);
+  //判断返回状态 执行相应操作
+  if (!response.statusCode || response.statusCode !== 200) {
+    uni.showToast({
+      icon: "none",
+      title: _.get(response, "data.message") || response.errMsg
+    });
+  }
+  return response;
 };
 
 // 轮播图
@@ -67,6 +76,18 @@ export const claimCoupons = ({ couponIds, openid }) => {
     dataType: "json",
     data: {
       couponIds,
+      openid
+    }
+  });
+};
+
+export const checkCoupons = ({ codeString, openid }) => {
+  return http.request({
+    url: `/ls-coupon/code`,
+    method: "PUT",
+    dataType: "json",
+    data: {
+      codeString,
       openid
     }
   });
