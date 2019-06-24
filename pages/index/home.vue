@@ -1,6 +1,6 @@
 <template lang="pug">
   view
-    swiper.screen-swiper.square-dot(indicator-dots circular autoplay interval='5000' duration='500')
+    swiper.screen-swiper.square-dot(indicator-dots circular autoplay interval='5000' duration='500' style="min-height:850upx")
       swiper-item(v-for='(item,index) in swiperList' :key='index')
         img(:src='item.url' mode='aspectFill' )
     view
@@ -43,13 +43,7 @@ export default {
           id: 0,
           type: "image",
           url:
-            "https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg"
-        },
-        {
-          id: 1,
-          type: "image",
-          url:
-            "https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg"
+            "http://data.5ikfc.com/static/discount/xfy/15/xfy-5ikfc-716_12.jpg"
         }
       ]
     };

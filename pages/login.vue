@@ -1,6 +1,6 @@
 <template lang="pug">
-  view
-    button(type='primary', open-type='getUserInfo', @getuserinfo='wechatLogin', withcredentials='true') 微信登录
+  view.page.flex.align-end
+    button.margin.flex-sub(type='primary', open-type='getUserInfo', @getuserinfo='wechatLogin', withcredentials='true') 微信登录
  
 </template>
 

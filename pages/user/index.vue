@@ -1,5 +1,5 @@
 <template lang="pug">
-  view
+  view(style="margin-bottom:100rpx")
     view.response.bg-gradual-green.radius(style="position: absolute; top: 0;height: 300upx;z-index:-1")
     view.padding.margin-top
       view.text-white.flex
@@ -7,7 +7,7 @@
         view.margin-left.flex.flex-direction.justify-between.padding-tb-xs
           view.text-xxl {{user.nickName}}
           view.padding-sm.cu-tag.round(style="background: rgba(0,0,0,0.2)")
-            text 优惠券数量: {{coupons.length}}
+            text {{coupons.length}} 张优惠券
       view.margin-top-xl
         coupon-item(v-for="(item,index) in coupons" :key="index" :item="item")
 
