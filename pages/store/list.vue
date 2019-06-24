@@ -8,9 +8,10 @@
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view
       view.cu-list.menu.sm-border.card-menu.margin-top
-        view.cu-item(v-for="(item,index) in _store.list" :key="index" @click="selectStore(item)")
-          view.padding
-            view 小肥羊{{item.name}}
+        view.cu-item.padding(v-for="(item,index) in _store.list" :key="index" @click="selectStore(item)")
+          view(style="flex:1")
+            image.logo(:src="require('../../static/logo.png')")
+          view(style="flex:6") 小肥羊{{item.name}}
 </template>
 
 
@@ -82,4 +83,9 @@ export default {
 };
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.logo
+  width 60upx
+  height 60upx
+  object-fit contain
+</style>

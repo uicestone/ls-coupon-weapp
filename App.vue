@@ -26,4 +26,8 @@ export default {
   position fixed
   top 0
   width 100%
+.text-green
+  color #2a6350
+.bg-green
+  background-color #2a6350
 </style>
