@@ -1,6 +1,6 @@
 <template lang="pug">
   view(style="margin-bottom:100rpx")
-    view.response.bg-gradual-green.radius(style="position: absolute; top: 0;height: 300upx;z-index:-1")
+    view.response.bg-green.radius(style="position: absolute; top: 0;height: 240upx;z-index:-1")
     view.padding.margin-top
       view.text-white.flex
         view.cu-avatar.round.xl(:style="[{ backgroundImage:'url(' +user.avatarUrl +')' }]")
@@ -8,7 +8,7 @@
           view.text-xxl {{user.nickName}}
           view.padding-sm.cu-tag.round(style="background: rgba(0,0,0,0.2)")
             text {{coupons.length}} 张优惠券
-      view.margin-top-xl
+      view(style="margin-top:80upx")
         coupon-item(v-for="(item,index) in coupons" :key="index" :item="item")
 
 </template>

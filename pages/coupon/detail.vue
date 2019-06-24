@@ -2,11 +2,12 @@
   view
     view.padding
       coupon-item.margin-top(:item="detail" :showDetail="false")
-        qrcode(slot="qrcode" ref="qrcode" :val="detail.codeString", :size="200" :showLoading="true" loadingText="loading" :onval="true")
+      view.flex.justify-center.margin-top
+        view.padding-sm.shadow.bg-white
+          qrcode(ref="qrcode" :val="detail.codeString", :size="200" :onval="true")
       view.margin-top.content
         u-parse(:content="detail.coupon.content" className="content")
 </template>
-
 
 <script>
 import { sync } from "vuex-pathify";
@@ -30,5 +31,8 @@ export default {
 };
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+._qrCode
+  height 200upx
+</style>
 

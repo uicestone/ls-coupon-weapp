@@ -1,11 +1,14 @@
 <template lang="pug">
   view.flex.margin-top.bg-white.radius.shadow
-    img.thumbnail(:src="item.coupon.thumbnailUrl")
-    view.flex.flex-direction.justify-between.padding-sm
-      view.margin-right.text-xl.text-bold {{item.coupon.desc}}
-      slot(name="qrcode")
-      button.cu-btn.block.bg-red(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail") 
-        text.text-df 查看详情
+    view.flex
+      image.thumbnail(:src="item.coupon.thumbnailUrl" mode="aspectFill")
+    view.flex-sub.flex.flex-direction.justify-between.padding-sm.padding-bottom-xs
+      view.margin-right(style="white-space:pre-line") {{item.coupon.desc}}
+      view.flex.justify-end
+        button.cu-btn.block.bg-green(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
+          text.text-df 查看详情
+      view.flex.justify-end(v-if="item.coupon.validFrom && item.coupon.validTill")
+        text.text-grey.text-xs 有效期：{{ item.coupon.validFrom }} ~ {{ item.coupon.validTill }}
 </template>
 
 <script>
@@ -32,8 +35,8 @@ export default {
 
 <style lang="stylus" scoped>
 .thumbnail
-  width 60%
-  height 160px
+  width 225upx;
+  height 225upx
 </style>
 
 
