@@ -1,9 +1,10 @@
 <template lang="pug">
   view
-    view.text-center
-      view.text-xl.text-red.margin-top-xl 请呼叫店员扫码使用
-      view.margin-top
-        qrcode( ref="qrcode" :val="detail.codeString", :size="300" :showLoading="true" loadingText="loading" :onval="true")
+    view.padding
+      coupon-item.margin-top(:item="detail" :showDetail="false")
+        qrcode(slot="qrcode" ref="qrcode" :val="detail.codeString", :size="200" :showLoading="true" loadingText="loading" :onval="true")
+      view.margin-top.content
+        u-parse(:content="detail.coupon.content" className="content")
 </template>
 
 
@@ -28,3 +29,6 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus"></style>
+

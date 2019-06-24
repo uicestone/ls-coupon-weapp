@@ -16,6 +16,7 @@ export default {
 @import 'common/colorui/main.css'
 @import 'common/colorui/icon.css'
 @import 'common/colorui/animation.css'
+@import '/components/gaoyia-parse/parse.css'
 
 .bottom-fixed
   position fixed

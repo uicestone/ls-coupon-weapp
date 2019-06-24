@@ -10,7 +10,9 @@ import couponItem from "./components/coupon-item.vue";
 
 import userIndex from "./pages/user/index.vue";
 import qrcode from "tki-qrcode";
+import uParse from "./components/gaoyia-parse/parse.vue";
 
+Vue.component("u-parse", uParse);
 Vue.component("qrcode", qrcode);
 Vue.component("tab-bar", tabbar);
 Vue.component("home", home);
