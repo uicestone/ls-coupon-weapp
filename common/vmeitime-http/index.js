@@ -27,7 +27,7 @@ export const test = data => {
 };
 
 http.interceptor.response = response => {
-  console.log('response:', response);
+  console.log("response:", response);
   //判断返回状态 执行相应操作
   if (!response.statusCode || response.statusCode !== 200) {
     uni.showToast({
@@ -69,12 +69,13 @@ export const getCoupons = ({ openid }) => {
   });
 };
 
-export const claimCoupons = ({ couponIds, openid }) => {
+export const claimCoupons = ({ couponIds, openid, customerNickname }) => {
   return http.request({
     url: `/ls-coupon/code`,
     method: "POST",
     dataType: "json",
     data: {
+      customerNickname,
       couponIds,
       openid
     }

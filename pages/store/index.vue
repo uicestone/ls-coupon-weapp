@@ -35,7 +35,11 @@ export default {
       const { openid } = this.user;
       const couponIds = this.store.currentStore.validCoupons.map(i => i.id);
       if (couponIds.length > 0) {
-        const res = await api.claimCoupons({ openid, couponIds });
+        const res = await api.claimCoupons({
+          openid,
+          couponIds,
+          customerNickname: this.user.nickName
+        });
         this.claimedCoupons = res.data;
       }
     }
