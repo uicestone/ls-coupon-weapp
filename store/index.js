@@ -12,10 +12,17 @@ pathify.options.mapping = "simple";
 const state = {
   loading: false,
   currentTab: "首页",
+  selectedAddress: "",
+  selectedPosition: {
+    latitude: 0,
+    longitude: 0
+  },
   position: {
     latitude: 0,
     longitude: 0
-  }
+  },
+  address: null,
+  addresses: []
 };
 
 const mutations = make.mutations(state);

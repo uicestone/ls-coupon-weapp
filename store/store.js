@@ -1,7 +1,6 @@
 import { make } from "vuex-pathify";
 
 const state = {
-  nearStore: [],
   currentStore: {
     id: uni.getStorageSync("storeId")
   },

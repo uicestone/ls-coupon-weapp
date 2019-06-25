@@ -74,12 +74,12 @@ export default {
         response.config = _config;
         if (process.env.NODE_ENV === "development") {
           if (statusCode === 200) {
-            console.log(
-              "【" +
-                _config.requestId +
-                "】 结果：" +
-                JSON.stringify(response.data)
-            );
+            // console.log(
+            //   "【" +
+            //     _config.requestId +
+            //     "】 结果：" +
+            //     JSON.stringify(response.data)
+            // );
           }
         }
         if (this.interceptor.response) {
@@ -89,7 +89,7 @@ export default {
           }
         }
         // 统一的响应日志记录
-        _reslog(response);
+        // _reslog(response);
         if (statusCode === 200) {
           //成功
           resolve(response);
@@ -106,19 +106,19 @@ export default {
       }
 
       // 统一的请求日志记录
-      _reqlog(_config);
+      // _reqlog(_config);
 
-      if (process.env.NODE_ENV === "development") {
-        console.log("【" + _config.requestId + "】 地址：" + _config.url);
-        if (_config.data) {
-          console.log(
-            "【" +
-              _config.requestId +
-              "】 参数：" +
-              JSON.stringify(_config.data)
-          );
-        }
-      }
+      // if (process.env.NODE_ENV === "development") {
+      //   console.log("【" + _config.requestId + "】 地址：" + _config.url);
+      //   if (_config.data) {
+      //     console.log(
+      //       "【" +
+      //         _config.requestId +
+      //         "】 参数：" +
+      //         JSON.stringify(_config.data)
+      //     );
+      //   }
+      // }
 
       uni.request(_config);
     });

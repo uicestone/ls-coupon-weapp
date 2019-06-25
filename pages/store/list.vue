@@ -1,5 +1,7 @@
 <template lang="pug">
   scroll-view
+    navigator.cu-bar.search.bg-white.padding(url="/pages/address/list")
+      view.text-lg.text-bold {{selectedAddress || address}}
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
@@ -18,6 +20,7 @@
 <script>
 import { sync } from "vuex-pathify";
 import * as api from "../../common/vmeitime-http";
+import { mapwx, errorHandler } from "../../utils";
 
 export default {
   data() {
@@ -27,7 +30,10 @@ export default {
   },
   computed: {
     currentStore: sync("store/currentStore"),
+    selectedAddress: sync("selectedAddress"),
+    selectedPosition: sync("selectedPosition"),
     position: sync("position"),
+    address: sync("address"),
     store: sync("store"),
     _store() {
       if (this.searchText) {
@@ -40,6 +46,11 @@ export default {
     try {
       await this.checkLocation();
     } catch (error) {}
+  },
+  watch: {
+    selectedPosition() {
+      this.getStore();
+    }
   },
   methods: {
     search() {
@@ -63,6 +74,20 @@ export default {
             latitude,
             longitude
           };
+
+          mapwx.reverseGeocoder({
+            location: {
+              latitude,
+              longitude
+            },
+            coord_type: 1,
+            success: res => {
+              this.address = res.result.formatted_addresses.recommend;
+            },
+            fail: error => {
+              errorHandler(error);
+            }
+          });
           this.getStore();
         },
         fail: async err => {
@@ -76,7 +101,10 @@ export default {
     },
     async getStore() {
       if (!this.position.latitude) return;
-      const res = await api.getNearShop(this.position);
+      const position = this.selectedPosition.latitude
+        ? this.selectedPosition
+        : this.position;
+      const res = await api.getNearShop(position);
       this.store.list = res.data;
     }
   }

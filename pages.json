@@ -44,6 +44,12 @@
       }
     },
     {
+      "path": "pages/address/list",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
       "path": "pages/login",
       "style": {
         "navigationBarTitleText": ""
