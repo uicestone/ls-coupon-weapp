@@ -57,7 +57,7 @@
         /* 小程序特有相关 */
         "appid" : "wx96b739f5008d31db",
         "setting" : {
-            "urlCheck" : false,
+            "urlCheck" : true,
             "minified" : false,
             "es6" : false,
             "postcss" : false
