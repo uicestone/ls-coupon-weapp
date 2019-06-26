@@ -1,7 +1,10 @@
 <template lang="pug">
   scroll-view
-    navigator.cu-bar.search.bg-white.padding(url="/pages/address/list")
-      view.text-lg.text-bold {{selectedAddress || address}}
+    navigator.padding-sm.bg-white(url="/pages/address/list" style="height:64upx")
+      view
+        text.cuIcon-location.padding-right-sm
+        text {{selectedAddress || address}}
+        text.cuIcon-unfold.padding-left-sm
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
