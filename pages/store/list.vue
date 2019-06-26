@@ -13,7 +13,7 @@
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view
       view.cu-list.menu.sm-border.card-menu.margin-top(style="margin-bottom:130upx")
-        view.cu-item.padding(v-for="(item,index) in _store.list" :key="index" @click="selectStore(item)")
+        view.cu-item.padding(v-for="(item,index) in _store" :key="index" @click="selectStore(item)")
           view(style="flex:1")
             image.logo(:src="require('../../static/logo.png')")
           view(style="flex:6") 小肥羊{{item.name}}
@@ -43,7 +43,7 @@ export default {
       if (this.searchText) {
         return this.store.list.filter(i => i.name.includes(this.searchText));
       }
-      return this.store;
+      return this.store.list;
     }
   },
   async mounted() {
