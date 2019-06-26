@@ -1,5 +1,5 @@
 <template lang="pug">
-  scroll-view
+  view
     navigator.padding-sm.bg-white(url="/pages/address/list" style="height:64upx")
       view
         text.cuIcon-location.padding-right-sm
@@ -12,11 +12,12 @@
       view.action(@click="search")
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view
-      view.cu-list.menu.sm-border.card-menu.margin-top
+      view.cu-list.menu.sm-border.card-menu.margin-top(style="margin-bottom:130upx")
         view.cu-item.padding(v-for="(item,index) in _store.list" :key="index" @click="selectStore(item)")
           view(style="flex:1")
             image.logo(:src="require('../../static/logo.png')")
           view(style="flex:6") 小肥羊{{item.name}}
+          view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
 </template>
 
 
