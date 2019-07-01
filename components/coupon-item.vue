@@ -6,10 +6,16 @@
       view.margin-right(style="white-space:pre-line") {{item.coupon.desc}}
       view.flex.justify-end
         button.cu-btn.block.text-white.btn-show-detail(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
-          text.text-df 查看详情
+          text.text-df(v-if="!item.used") 查看详情
+          text.text-white(v-else) 已使用
           image(mode="aspectFill" :src="require('../static/bg_coupon_btn.jpg')")
-      view.flex.justify-end(v-if="item.coupon.validFrom && item.coupon.validTill")
-        text.text-grey.text-xs 有效期：{{ item.coupon.validFrom }} ~ {{ item.coupon.validTill }}
+      view
+        view.flex.justify-end(v-if="!item.coupon.allShops")
+          text.text-grey.text-xs 适用门店：{{ item.coupon.shops.map(s => s.name).join("、") }}
+        view.flex.justify-end(v-else)
+          text.text-grey.text-xs 适用所有自营门店
+        view.flex.justify-end(v-if="item.coupon.validFrom && item.coupon.validTill")
+          text.text-grey.text-xs 有效期：{{ item.coupon.validFrom }} ~ {{ item.coupon.validTill }}
 </template>
 
 <script>
