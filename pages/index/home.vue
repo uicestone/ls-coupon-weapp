@@ -1,14 +1,19 @@
 <template lang="pug">
-  view
-    swiper.screen-swiper.square-dot(indicator-dots circular autoplay interval='5000' duration='500' style="min-height:850upx")
-      swiper-item(v-for='(item,index) in swiperList' :key='index')
-        img(:src='item.url' mode='aspectFill' )
-    view
-      view.cu-list.menu.sm-border.card-menu.margin-top
-        view.cu-item.arrow(v-for="(item,index) in actionList" :key="index" @click="handleAction(item)")
-          button.content.cu-btn
-            text(:class="item.class")
-            view.text-grey {{item.name}}
+  view.page
+    view.top.flex.justify-center
+      image(mode="aspectFit" :src="require('../../static/bg_home_top.jpg')")
+      image.logo(:src="require('../../static/logo.png')")
+    swiper.screen-swiper.square-dot.margin(indicator-dots circular autoplay interval='5000' duration='500')
+      swiper-item.swiper-item(v-for='(item,index) in swiperList' :key='index')
+        image(:src='item.url' mode='aspectFit' )
+    view.links.flex.justify-between
+      view.link.margin-left(@click="currentTab = '优惠'")
+        image(mode="aspectFit" :src="require('../../static/home_btn_shop_list.jpg')")
+      view.link.margin-right(@click="currentTab = '我的'")
+        image(mode="aspectFit" :src="require('../../static/home_btn_user.jpg')")
+    view.bottom.flex.justify-center
+      image(mode="aspectFit" :src="require('../../static/home_bottom.png')")
+
 </template>
 
 <script>
@@ -43,7 +48,7 @@ export default {
           id: 0,
           type: "image",
           url:
-            "http://data.5ikfc.com/static/discount/xfy/15/xfy-5ikfc-716_12.jpg"
+            "https://ls-coupon.codeispoetry.tech/wp-content/uploads/2019/07/中间Banner.jpg"
         }
       ]
     };
@@ -61,4 +66,38 @@ export default {
 };
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus" scoped>
+  .page
+    background-color #f0f0f0
+    min-height 100vh
+  .top
+    position relative
+    margin-bottom 100upx
+    image
+      width 750upx
+      height 268upx
+    image.logo
+      width 144upx
+      height 144upx
+      position absolute
+      bottom -72upx
+  .screen-swiper
+    border-radius 20upx
+    min-height 330upx
+    .swiper-item
+      height 330upx
+      image
+        height 330upx
+  .links
+    margin-top 6vh
+    .link
+      image
+        width 326upx
+        height 280upx
+  .bottom
+    margin-top 6vh
+    margin-bottom 100upx
+    image
+      width 350upx
+      height 250upx
+</style>
