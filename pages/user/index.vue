@@ -1,7 +1,7 @@
 <template lang="pug">
   view(style="margin-bottom:100rpx")
-    view.response.bg-green.radius(style="position: absolute; top: 0;height: 240upx;z-index:-1")
-    view.padding.margin-top
+    view.response.radius(style="position: absolute; top: 0;height: 286upx;z-index:-1; background-image: url('../../static/bg_user_top.jpg'); background-size: cover")
+    view.padding-lg(style="margin-top:70upx")
       view.text-white.flex
         view.cu-avatar.round.xl(:style="[{ backgroundImage:'url(' +user.avatarUrl +')' }]")
         view.margin-left.flex.flex-direction.justify-between.padding-tb-xs
