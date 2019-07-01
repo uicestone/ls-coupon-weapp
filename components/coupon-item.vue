@@ -5,7 +5,7 @@
     view.flex-sub.flex.flex-direction.justify-between.padding-sm.padding-bottom-xs
       view.margin-right(style="white-space:pre-line") {{item.coupon.desc}}
       view.flex.justify-end
-        button.cu-btn.block.bg-green(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
+        button.cu-btn.block.bg-green(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx;background:url('../../static/bg_user_top.jpg') 50% 50%; background-size:500%") 
           text.text-df 查看详情
       view.flex.justify-end(v-if="item.coupon.validFrom && item.coupon.validTill")
         text.text-grey.text-xs 有效期：{{ item.coupon.validFrom }} ~ {{ item.coupon.validTill }}
