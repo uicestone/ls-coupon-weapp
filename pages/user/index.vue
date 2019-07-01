@@ -1,6 +1,7 @@
 <template lang="pug">
   view(style="margin-bottom:100rpx")
-    view.response.radius(style="position: absolute; top: 0;height: 286upx;z-index:-1; background-image: url('../../static/bg_user_top.jpg'); background-size: cover")
+    view.response.radius.header-bg(style="position: absolute; top: 0;height: 286upx;z-index:-1")
+      image(mode="aspectFill" :src="require('../../static/bg_user_top.jpg')")
     view.padding-lg(style="margin-top:70upx")
       view.text-white.flex
         view.cu-avatar.round.xl(:style="[{ backgroundImage:'url(' +user.avatarUrl +')' }]")
@@ -41,3 +42,10 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+  .header-bg
+    image
+      width 100%
+      height 100%
+</style>
