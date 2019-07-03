@@ -5,7 +5,7 @@
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
-        input(v-model="searchText"  @blur="getAddresses" :adjust-position='false' type='text' placeholder='搜索附近地址' confirm-type='search')
+        input(v-model="searchText"  @blur="getAddresses" :adjust-position='false' type='text' placeholder='搜索地址' confirm-type='search')
       view.action(@click="currentPosition")
         button.cu-btn.shadow-blur.round
           text.cuIcon-focus.text-grey(style="font-size: 40upx")

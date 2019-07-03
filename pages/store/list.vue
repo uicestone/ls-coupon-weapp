@@ -8,7 +8,7 @@
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
-        input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索附近门店' confirm-type='search')
+        input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索门店' confirm-type='search')
       view.action(@click="search")
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view

@@ -11,8 +11,6 @@
         image(mode="aspectFit" :src="require('../../static/home_btn_shop_list.jpg')")
       view.link.margin-right(@click="currentTab = '我的'")
         image(mode="aspectFit" :src="require('../../static/home_btn_user.jpg')")
-    view.bottom.flex.justify-center
-      image(mode="aspectFit" :src="require('../../static/home_bottom.png')")
 
 </template>
 
