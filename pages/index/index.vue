@@ -13,11 +13,15 @@ import { wechatLogin } from "../../services";
 
 export default {
   computed: {
-    currentTab: sync("currentTab")
+    currentTab: sync("currentTab"),
+    user: sync("auth/user")
   },
   async onLoad() {
     try {
       const data = await wechatLogin();
+      if (this.user.roles) {
+        this.currentTab = '管理';
+      }
     } catch (error) {
       console.error(error);
       uni.navigateTo({

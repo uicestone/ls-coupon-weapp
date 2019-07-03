@@ -39,10 +39,13 @@ export default {
   },
   methods: {
     checkTab(item) {
-      if (item.name == "管理") {
+      if (item.name === "管理") {
         if (!this.user.roles) {
           return false;
         }
+      }
+      if (item.name !== "管理" && this.user.roles) {
+        return false;
       }
       return true;
     },
