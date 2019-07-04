@@ -1,7 +1,14 @@
 <template lang="pug">
   view.flex.flex-direction(style="height:calc(100vh - 100upx)")
-    view.cu-bar.flex.justify-between.padding-left.bg-white
-      text.text-lg 店员端
+    view.cu-bar.flex.justify-between.padding-lr.bg-white
+      text.text-lg 优惠券核销
+      text.text-lg {{ user.manageShop.name }}
+    view.cu-list.menu.sm-border.card-menu.margin-top
+      view.cu-item.padding(v-for="code in recentCodes" :key="code.id")
+        view.flex.flex-direction
+          view  {{ code.codeString }}
+          view {{ code.customerNickname }}
+        view {{ code.coupon.desc }}
     view.flex.align-end.flex-sub
       button.cu-btn.lg.bg-green.flex-sub.margin(@click="scanQrcode")
         text.cuIcon-scan.text-white.margin-right-sm
@@ -16,7 +23,8 @@ import { sync } from "vuex-pathify";
 export default {
   data() {
     return {
-      couponDetail: {}
+      couponDetail: {},
+      recentCodes: []
     };
   },
   computed: {
@@ -36,13 +44,22 @@ export default {
             console.log(this.couponDetail);
             uni.showModal({
               title: this.couponDetail.wasUsed ? "先前已被核销" : "核销成功",
-              content: this.couponDetail.codeString + " " + this.couponDetail.coupon.desc,
+              content:
+                this.couponDetail.codeString +
+                " " +
+                this.couponDetail.coupon.desc,
               showCancel: false
             });
           }
         }
       });
     }
+  },
+  async mounted() {
+    this.recentCodes = (await api.getRecentCodes({
+      shopId: this.user.manageShop.id,
+      openid: this.user.openid
+    })).data;
   }
 };
 </script>

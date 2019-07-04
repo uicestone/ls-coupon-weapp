@@ -94,6 +94,12 @@ export const checkCoupons = ({ codeString, openid }) => {
   });
 };
 
+export const getRecentCodes = ({ shopId, openid }) => {
+  return http.request({
+    url: `/ls-coupon/code?used=true&shopId=${shopId}&openid=${openid}`
+  });
+};
+
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
   test,
