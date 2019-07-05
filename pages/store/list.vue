@@ -100,11 +100,11 @@ export default {
             showCancel: false,
             icon: "none"
           });
+          this.getStore();
         }
       });
     },
     async getStore() {
-      if (!this.position.latitude) return;
       const position = this.selectedPosition.latitude
         ? this.selectedPosition
         : this.position;

@@ -1,5 +1,6 @@
 <template lang="pug">
   view
+    login
     home(v-if="currentTab==='首页'")
     store-list(v-if="currentTab==='优惠'")
     user-index(v-if="currentTab==='我的'")
@@ -10,8 +11,12 @@
 <script>
 import { sync } from "vuex-pathify";
 import { wechatLogin } from "../../services";
+import login from "../login";
 
 export default {
+  components: {
+    login
+  },
   computed: {
     currentTab: sync("currentTab"),
     user: sync("auth/user")
@@ -24,9 +29,7 @@ export default {
       }
     } catch (error) {
       console.error(error);
-      uni.navigateTo({
-        url: "/pages/login"
-      });
+      this.auth.showLogin = true;
     }
   }
 };

@@ -45,6 +45,7 @@ export const wechatLogin = () =>
 export const stroreUser = ({ user } = {}) => {
   try {
     store.state.auth.user = user;
+    store.state.auth.showLogin = false;
   } catch (e) {
     console.error(e);
   }
