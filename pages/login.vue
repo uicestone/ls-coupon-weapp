@@ -19,7 +19,7 @@ export default {
     async wechatLogin() {
       try {
         const res = await wechatLogin();
-        this.currentTab = "优惠";
+        console.log(res)
       } catch (err) {
         console.log(err);
       }

@@ -18,7 +18,7 @@ export const wechatLogin = () =>
               let { userInfo } = userData;
               userInfo = Object.assign({}, userInfo, res.data);
               console.log(userInfo);
-              stroreUser({ user: userInfo });
+              handleLogin({ user: userInfo });
               resolve(userInfo);
             } catch (err) {
               uni.showToast({
@@ -42,10 +42,15 @@ export const wechatLogin = () =>
     });
   });
 
-export const stroreUser = ({ user } = {}) => {
+export const handleLogin = ({ user } = {}) => {
   try {
     store.state.auth.user = user;
     store.state.auth.showLogin = false;
+    if (user.roles) {
+      store.state.currentTab = "管理";
+    } else {
+      store.state.currentTab = "优惠";
+    }
   } catch (e) {
     console.error(e);
   }

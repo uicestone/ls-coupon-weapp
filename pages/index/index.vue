@@ -19,14 +19,12 @@ export default {
   },
   computed: {
     currentTab: sync("currentTab"),
-    user: sync("auth/user")
+    user: sync("auth/user"),
+    auth: sync("auth")
   },
   async onLoad() {
     try {
       const data = await wechatLogin();
-      if (this.user.roles) {
-        this.currentTab = '管理';
-      }
     } catch (error) {
       console.error(error);
       this.auth.showLogin = true;
