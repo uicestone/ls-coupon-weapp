@@ -1,10 +1,9 @@
 <template lang="pug">
   view
-    navigator.padding-sm.bg-white(url="/pages/address/list" style="height:64upx")
-      view
-        text.cuIcon-location.padding-right-sm
-        text {{selectedAddress || address}}
-        text.cuIcon-unfold.padding-left-sm
+    view.padding-sm.bg-white(@click="goLocationList" style="height:64upx")
+      text.cuIcon-location.padding-right-sm
+      text {{selectedAddress || address || '无法获取当前位置'}}
+      text.cuIcon-unfold.padding-left-sm(v-if="address || selectedAddress")
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
@@ -12,12 +11,15 @@
       view.action(@click="search")
         button.cu-btn.bg-green.shadow-blur.round 搜索
     view
-      view.cu-list.menu.sm-border.card-menu.margin-top(style="margin-bottom:130upx")
+      view.cu-list.menu.sm-border.card-menu.margin-top(v-if="_store.length || searchText" style="margin-bottom:130upx")
         view.cu-item.padding(v-for="(item,index) in _store" :key="index" @click="selectStore(item)")
           view(style="flex:1")
             image.logo(:src="require('../../static/logo.png')")
           view(style="flex:6") 小肥羊{{item.name}}
           view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
+      view(v-else)
+          view.load-progress
+            view.load-progress-spinner()
 </template>
 
 
@@ -95,11 +97,11 @@ export default {
           this.getStore();
         },
         fail: async err => {
-          uni.showModal({
-            title: "获取位置失败, 请手动选择您最近的门店",
-            showCancel: false,
-            icon: "none"
-          });
+          // uni.showModal({
+          //   title: "获取位置失败, 请手动选择您最近的门店",
+          //   showCancel: false,
+          //   icon: "none"
+          // });
           this.getStore();
         }
       });
@@ -110,6 +112,12 @@ export default {
         : this.position;
       const res = await api.getNearShop(position);
       this.store.list = res.data;
+    },
+    goLocationList() {
+      if (!this.address && !this.selectedAddress) {
+        return;
+      }
+      uni.navigateTo({ url: "/pages/address/list" });
     }
   }
 };

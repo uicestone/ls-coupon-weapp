@@ -1,11 +1,11 @@
 <template lang="pug">
   scroll-view
-    view.cu-bar.search.bg-white.padding
+    view.cu-bar.search.bg-white.padding(v-if="selectedAddress ||  address")
       view.text-lg.text-bold {{selectedAddress ||  address}}
     view.cu-bar.search.bg-white
       view.search-form.round
         text.cuIcon-search
-        input(v-model="searchText"  @blur="getAddresses" :adjust-position='false' type='text' placeholder='搜索地址' confirm-type='search')
+        input(v-model="searchText"  @input="getAddresses" :adjust-position='false' type='text' placeholder='搜索地址' confirm-type='search')
       view.action(@click="currentPosition")
         button.cu-btn.shadow-blur.round
           text.cuIcon-focus.text-grey(style="font-size: 40upx")
@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     getAddresses() {
+      if (this.searchText.length < 2) return;
       mapwx.search({
         keyword: this.searchText,
         page_size: 20,

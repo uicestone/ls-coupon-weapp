@@ -14,12 +14,12 @@ const state = {
   currentTab: "首页",
   selectedAddress: "",
   selectedPosition: {
-    latitude: 0,
-    longitude: 0
+    latitude: NaN,
+    longitude: NaN
   },
   position: {
-    latitude: 0,
-    longitude: 0
+    latitude: NaN,
+    longitude: NaN
   },
   address: null,
   addresses: []

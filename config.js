@@ -1,3 +1,3 @@
 export const config = {
-  mapKey: "HRHBZ-MQ6E3-OS63P-3TG2N-DE5LO-OUFXH"
+  mapKey: "B4BBZ-MNB3D-6NX4C-H7IHO-TTYA3-QZFUW"
 };
