@@ -20,8 +20,10 @@ export default {
       try {
         const res = await wechatLogin();
         console.log(res);
+        this.$emit("success");
       } catch (err) {
         console.log(err);
+        this.$emit("fail");
       }
     }
   }
