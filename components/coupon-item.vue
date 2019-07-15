@@ -27,7 +27,13 @@ export default {
     },
     item: {
       type: Object,
-      default: {}
+      default: {
+        id: null,
+        codeString: "-",
+        coupon: {
+          shops: []
+        }
+      }
     }
   },
   methods: {
@@ -42,7 +48,7 @@ export default {
 
 <style lang="stylus" scoped>
 .thumbnail
-  width 225upx;
+  width 225upx
   height 225upx
 .btn-show-detail
   position relative

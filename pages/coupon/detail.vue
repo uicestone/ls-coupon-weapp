@@ -16,7 +16,10 @@ export default {
     return {
       detail: {
         id: null,
-        codeString: "placeholder"
+        codeString: "-",
+        coupon: {
+          shops: []
+        }
       }
     };
   },
@@ -24,8 +27,8 @@ export default {
     coupons: sync("auth/coupons")
   },
   onLoad(data) {
-    const conpon = this.coupons.find(i => i.id == data.id);
-    this.detail = conpon;
+    const coupon = this.coupons.find(i => i.id == data.id);
+    this.detail = coupon;
     this.$refs.qrcode._makeCode();
   }
 };
