@@ -1,5 +1,5 @@
 <template lang="pug">
-  view
+  view(style="margin-bottom:100upx")
     view.response.radius.header-bg(style="position: absolute; top: 0;height: 350upx;z-index:-1")
       image(mode="aspectFill" :src="require('../../static/bg_user_top.jpg')")
     view.padding-lg(style="margin-top:70upx")
@@ -11,7 +11,7 @@
           view.padding-top-sm
             text {{store.currentStore.address}}
     view.text-center.padding(v-if="claimedCoupons.length > 0")
-      view.margin-top-xl.text-xl 恭喜获得优惠券
+      view.margin-top-xl.text-xl {{ claimedCoupons.some(code => code.claimed) ? '您已领取过此优惠' : '恭喜获得优惠券' }}
       coupon-item(v-for="(item,index) in claimedCoupons" :key="index" :item="item")
     view.flex.align-center.justify-center.no-coupon(v-else)
       image(mode="aspectFit" :src="require('../../static/no_coupon.jpg')")
@@ -31,7 +31,7 @@ export default {
   },
   onLoad(data) {
     this.id = data.id;
-    this.store.currentStore.id = data.shop;
+    this.store.currentStore.id = this.id;
     this.initStoreDetail();
   },
   computed: {
@@ -70,13 +70,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .no-coupon
-    height 70vh
-    image
-      width 300upx
-  .header-bg
-    image
-      width 100%
-      height 100%
+.no-coupon
+  height 70vh
+  image
+    width 300upx
+.header-bg
+  image
+    width 100%
+    height 100%
 </style>
 

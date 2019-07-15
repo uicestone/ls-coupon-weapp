@@ -3,12 +3,12 @@
     view.flex
       image.thumbnail(:src="item.coupon.thumbnailUrl" mode="aspectFill")
     view.flex-sub.flex.flex-direction.justify-between.padding-sm.padding-bottom-xs
-      view.margin-right(style="white-space:pre-line") {{item.coupon.desc}}
+      view.margin-right.flex.justify-start(style="white-space:pre-line") {{item.coupon.desc}}
       view.flex.justify-end
-        button.cu-btn.block.text-white.btn-show-detail(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
+        button.cu-btn.block.text-white.bg-green.btn-show-detail(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
           text.text-df(v-if="!item.used") 查看详情
           text.text-white(v-else) 已使用
-          image(mode="aspectFill" :src="require('../static/bg_coupon_btn.jpg')")
+          image(mode="aspectFill" :src="buttonBg")
       view
         view.flex.justify-end(v-if="!item.coupon.allShops")
           text.text-grey.text-xs 适用门店：{{ item.coupon.shops.map(s => s.name).join("、") }}
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import buttonBg from "../static/bg_coupon_btn.jpg";
+
 export default {
   props: {
     showDetail: {
@@ -35,6 +37,11 @@ export default {
         }
       }
     }
+  },
+  data() {
+    return {
+      buttonBg
+    };
   },
   methods: {
     goCouponDetail(item) {
