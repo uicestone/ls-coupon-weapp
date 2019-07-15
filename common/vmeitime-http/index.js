@@ -66,6 +66,17 @@ export const getNearShop = ({ latitude, longitude }) => {
   });
 };
 
+export const getShop = ({ id, latitude, longitude }) => {
+  let url = `/ls-coupon/shop/${id}`;
+  if (!isNaN(latitude) && !isNaN(longitude)) {
+    url += `?near=${latitude},${longitude}`;
+  }
+  return http.request({
+    url,
+    method: "GET"
+  });
+};
+
 export const getCoupons = ({ openid }) => {
   return http.request({
     url: `/ls-coupon/code?openid=${openid}`,

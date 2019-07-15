@@ -22,9 +22,12 @@ export default {
     user: sync("auth/user"),
     auth: sync("auth")
   },
-  async onLoad() {
+  async onLoad(params) {
     try {
       const data = await wechatLogin();
+      if (params.shop) {
+        uni.navigateTo({ url: `/pages/store/index?shop=${params.shop}` });
+      }
     } catch (error) {
       console.error(error);
       this.auth.showLogin = true;
