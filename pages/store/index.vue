@@ -52,15 +52,14 @@ export default {
 
       if (this.couponId) {
         couponIds = [this.couponId];
-      } else if (
-        this.store.currentStore.id &&
-        !this.store.currentStore.validCoupons
-      ) {
-        this.store.currentStore = (await api.getShop({
-          id: this.store.currentStore.id,
-          latitude,
-          longitude
-        })).data;
+      } else if (this.store.currentStore.id) {
+        if (!this.store.currentStore.validCoupons) {
+          this.store.currentStore = (await api.getShop({
+            id: this.store.currentStore.id,
+            latitude,
+            longitude
+          })).data;
+        }
         couponIds = this.store.currentStore.validCoupons.map(i => i.id);
       }
 
