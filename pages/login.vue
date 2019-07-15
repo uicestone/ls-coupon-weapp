@@ -1,8 +1,8 @@
 <template lang="pug">
-  view.cu-modal(:class="[auth.showLogin ? 'show':'']")
+  view.cu-modal.bottom-modal(:class="[auth.showLogin ? 'show':'']")
     view.cu-dialog
-      view.cu-bar
-        button.flex-sub(type='primary', open-type='getUserInfo', @getuserinfo='wechatLogin', withcredentials='true') 微信登录
+      view.cu-bar.bg-green
+        button.bg-green.flex-sub(open-type='getUserInfo', @getuserinfo='wechatLogin', withcredentials='true') 微信登录
  
 </template>
 
@@ -19,7 +19,7 @@ export default {
     async wechatLogin() {
       try {
         const res = await wechatLogin();
-        console.log(res)
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
