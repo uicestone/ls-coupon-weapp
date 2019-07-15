@@ -11,6 +11,7 @@ export const wechatLogin = () =>
         console.log(loginRes);
         uni.getUserInfo({
           provider,
+          lang: "zh_CN",
           success: async userData => {
             // console.log(userData);
             try {
@@ -48,8 +49,6 @@ export const handleLogin = ({ user } = {}) => {
     store.state.auth.showLogin = false;
     if (user.roles) {
       store.state.currentTab = "管理";
-    } else {
-      store.state.currentTab = "优惠";
     }
   } catch (e) {
     console.error(e);
