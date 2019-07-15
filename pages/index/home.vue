@@ -1,8 +1,6 @@
 <template lang="pug">
   view.page
-    view.top.flex.justify-center
-      image(mode="aspectFit" :src="require('../../static/bg_home_top.jpg')")
-      image.logo(:src="require('../../static/logo.png')")
+    home-header
     swiper.screen-swiper.square-dot.margin(indicator-dots circular autoplay interval='5000' duration='500')
       swiper-item.swiper-item(v-for='(item,index) in swiperList' :key='index')
         image(:src='item.url' mode='aspectFit' )
@@ -65,37 +63,26 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .page
-    background-color #f0f0f0
-    min-height 100vh
-  .top
-    position relative
-    margin-bottom 100upx
+.page
+  background-color #f0f0f0
+  min-height 100vh
+.screen-swiper
+  border-radius 20upx
+  min-height 330upx
+  .swiper-item
+    height 330upx
     image
-      width 750upx
-      height 268upx
-    image.logo
-      width 144upx
-      height 144upx
-      position absolute
-      bottom -72upx
-  .screen-swiper
-    border-radius 20upx
-    min-height 330upx
-    .swiper-item
       height 330upx
-      image
-        height 330upx
-  .links
-    margin-top 6vh
-    .link
-      image
-        width 326upx
-        height 280upx
-  .bottom
-    margin-top 6vh
-    margin-bottom 100upx
+.links
+  margin-top 6vh
+  .link
     image
-      width 350upx
-      height 250upx
+      width 326upx
+      height 280upx
+.bottom
+  margin-top 6vh
+  margin-bottom 100upx
+  image
+    width 350upx
+    height 250upx
 </style>

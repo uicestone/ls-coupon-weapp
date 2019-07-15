@@ -26,7 +26,10 @@ export default {
     try {
       const data = await wechatLogin();
       if (params.shop) {
-        uni.navigateTo({ url: `/pages/store/index?shop=${params.shop}` });
+        uni.navigateTo({ url: `/pages/store/index?id=${params.shop}` });
+      }
+      if (params.coupon) {
+        uni.navigateTo({ url: `/pages/store/index?coupon=${params.coupon}` });
       }
     } catch (error) {
       console.error(error);

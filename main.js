@@ -7,6 +7,7 @@ import home from "./pages/index/home.vue";
 import storeList from "./pages/store/list.vue";
 import storeManage from "./pages/store/manage.vue";
 import couponItem from "./components/coupon-item.vue";
+import homeHeader from "./components/home-header.vue";
 
 import userIndex from "./pages/user/index.vue";
 import qrcode from "tki-qrcode";
@@ -20,6 +21,7 @@ Vue.component("store-list", storeList);
 Vue.component("user-index", userIndex);
 Vue.component("store-manage", storeManage);
 Vue.component("coupon-item", couponItem);
+Vue.component("home-header", homeHeader);
 
 Vue.config.productionTip = false;
 
