@@ -26,15 +26,20 @@ export default {
   computed: {
     currentTab: sync("currentTab"),
     user: sync("auth/user"),
-    auth: sync("auth")
+    auth: sync("auth"),
+    params: sync("params")
   },
   async onLoad(params) {
     const data = await this.wechatLogin();
+    this.params = params;
     if (params.shop) {
       uni.navigateTo({ url: `/pages/store/index?id=${params.shop}` });
     }
     if (params.coupon) {
       uni.navigateTo({ url: `/pages/store/index?coupon=${params.coupon}` });
+    }
+    if (params.manager) {
+      this.currentTab = "管理";
     }
   },
   methods: {

@@ -115,6 +115,19 @@ export const getRecentCodes = ({ shopId, openid }) => {
   });
 };
 
+export const bindManager = ({ shopId, openid, nickname }) => {
+  return http.request({
+    url: `/ls-coupon/shop/manager`,
+    method: "POST",
+    dataType: "json",
+    data: {
+      openid,
+      shopId,
+      nickname
+    }
+  });
+};
+
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
   test,

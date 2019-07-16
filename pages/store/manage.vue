@@ -1,18 +1,40 @@
 <template lang="pug">
-  view.flex.flex-direction(style="height:calc(100vh - 100upx)")
-    view.cu-bar.flex.justify-between.padding-lr.bg-white
-      text.text-lg 优惠券核销
-      text.text-lg {{ user.manageShop.name }}
-    view.cu-list.menu.sm-border.card-menu.margin-top
-      view.cu-item.padding(v-for="code in recentCodes" :key="code.id")
-        view.flex.flex-direction
-          view  {{ code.codeString }}
-          view {{ code.customerNickname }}
-        view {{ code.coupon.desc }}
-    view.flex.align-end.flex-sub
-      button.cu-btn.lg.bg-green.flex-sub.margin(@click="scanQrcode")
-        text.cuIcon-scan.text-white.margin-right-sm
-        text 扫码
+  view
+    view.flex.flex-direction(v-if="isBindManager" style="height:calc(100vh - 100upx)")
+      view.cu-bar.search.bg-white
+        view.search-form.round
+          text.cuIcon-search
+          input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索门店' confirm-type='search')
+        view.action(@click="search")
+          button.cu-btn.bg-green.shadow-blur.round 搜索
+      view
+        view.cu-list.menu.sm-border.card-menu.margin-top(v-if="_store.length || searchText" style="margin-bottom:200upx" )
+          view.cu-item.padding(v-for="(item,index) in _store" :key="index" @click="selectStore(item)" :class="[form.shopId==item.id ? 'selected':'' ]")
+            view(style="flex:1")
+              image.logo(:src="require('../../static/logo.png')")
+            view(style="flex:6") 小肥羊{{item.name}}
+            view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
+        view(v-else)
+            view.load-progress
+              view.load-progress-spinner()
+      view.flex.align-end.flex-sub.bind-button
+        button.cu-btn.lg.bg-green.flex-sub.margin(@click="bindManager")
+          text.cuIcon-shop.text-white.margin-right-sm
+          text 绑定
+    view.flex.flex-direction(v-if="!isBindManager" style="height:calc(100vh - 100upx)")
+      view.cu-bar.flex.justify-between.padding-lr.bg-white
+        text.text-lg 优惠券核销
+        text.text-lg {{ user.manageShop.name }}
+      view.cu-list.menu.sm-border.card-menu.margin-top
+        view.cu-item.padding(v-for="code in recentCodes" :key="code.id")
+          view.flex.flex-direction
+            view  {{ code.codeString }}
+            view {{ code.customerNickname }}
+          view {{ code.coupon.desc }}
+      view.flex.align-end.flex-sub
+        button.cu-btn.lg.bg-green.flex-sub.margin(@click="scanQrcode")
+          text.cuIcon-scan.text-white.margin-right-sm
+          text 扫码
 </template>
 
 
@@ -23,14 +45,57 @@ import { sync } from "vuex-pathify";
 export default {
   data() {
     return {
+      searchText: null,
+      form: {
+        shopId: null
+      },
       couponDetail: {},
       recentCodes: []
     };
   },
   computed: {
-    user: sync("auth/user")
+    user: sync("auth/user"),
+    position: sync("position"),
+    params: sync("params"),
+    store: sync("store"),
+    _store() {
+      if (this.searchText) {
+        return this.store.list.filter(i => i.name.includes(this.searchText));
+      }
+      return this.store.list;
+    },
+    isBindManager() {
+      return this.params.manager;
+    }
   },
   methods: {
+    async init() {
+      if (this.user.manageShop.id) {
+        this.recentCodes = (await api.getRecentCodes({
+          shopId: this.user.manageShop.id,
+          openid: this.user.openid
+        })).data;
+      }
+      this.getStore();
+    },
+    async selectStore(item) {
+      this.form.shopId = item.id;
+    },
+    async getStore() {
+      const res = await api.getNearShop(this.position);
+      this.store.list = res.data;
+    },
+    search() {
+      this.searchText = "";
+    },
+    async bindManager() {
+      const { openid, name } = this.user;
+      const { shopId } = this.form;
+      const res = await api.bindManager({ openid, nickname: name, shopId });
+      this.user = { ...this.user, ...res.data };
+      this.params.manager = false;
+      this.init();
+    },
     scanQrcode() {
       uni.scanCode({
         success: async code => {
@@ -56,10 +121,17 @@ export default {
     }
   },
   async mounted() {
-    this.recentCodes = (await api.getRecentCodes({
-      shopId: this.user.manageShop.id,
-      openid: this.user.openid
-    })).data;
+    this.init();
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+.selected
+  color green
+.bind-button
+  position fixed
+  bottom 80upx
+  width 100%
+  left 0
+</style>

@@ -13,6 +13,9 @@ const state = {
   loading: false,
   currentTab: "首页",
   selectedAddress: "",
+  params: {
+    manager: false
+  },
   selectedPosition: {
     latitude: NaN,
     longitude: NaN
