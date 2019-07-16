@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     async init() {
-      if (this.user.manageShop.id) {
+      if (_.get(this.user, "manageShop.id")) {
         this.recentCodes = (await api.getRecentCodes({
           shopId: this.user.manageShop.id,
           openid: this.user.openid
@@ -89,9 +89,9 @@ export default {
       this.searchText = "";
     },
     async bindManager() {
-      const { openid, name } = this.user;
+      const { openid, nickName } = this.user;
       const { shopId } = this.form;
-      const res = await api.bindManager({ openid, nickname: name, shopId });
+      const res = await api.bindManager({ openid, nickname: nickName, shopId });
       this.user = { ...this.user, ...res.data };
       this.params.manager = false;
       this.init();
