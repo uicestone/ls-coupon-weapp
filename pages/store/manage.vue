@@ -65,6 +65,9 @@ export default {
       return this.store.list;
     },
     isBindManager() {
+      if (_.get(this.user, "manageShop.id")) {
+        return false;
+      }
       return this.params.manager;
     }
   },
