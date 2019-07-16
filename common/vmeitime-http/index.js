@@ -115,7 +115,7 @@ export const getRecentCodes = ({ shopId, openid }) => {
   });
 };
 
-export const bindManager = ({ shopId, openid, nickname }) => {
+export const bindManager = ({ shopId, openid, nickname, displayName }) => {
   return http.request({
     url: `/ls-coupon/shop/manager`,
     method: "POST",
@@ -123,7 +123,8 @@ export const bindManager = ({ shopId, openid, nickname }) => {
     data: {
       openid,
       shopId,
-      nickname
+      nickname,
+      displayName
     }
   });
 };
