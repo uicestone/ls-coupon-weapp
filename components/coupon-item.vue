@@ -10,10 +10,8 @@
           text.text-white(v-else) 已使用
           image(mode="aspectFill" :src="buttonBg")
       view
-        view.flex.justify-end(v-if="!item.coupon.allShops")
-          text.text-grey.text-xs 适用门店：{{ item.coupon.shops.map(s => s.name).join("、") }}
-        view.flex.justify-end(v-else)
-          text.text-grey.text-xs 适用所有自营门店
+        view.flex.justify-end
+          text.text-grey.text-xs 适用{{item.coupon.allShops?'所有自营':'部分'}}门店
         view.flex.justify-end(v-if="item.coupon.validFrom && item.coupon.validTill")
           text.text-grey.text-xs 有效期：{{ item.coupon.validFrom }} ~ {{ item.coupon.validTill }}
 </template>

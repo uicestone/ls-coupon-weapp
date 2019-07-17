@@ -55,7 +55,7 @@ export const wechatLogin = ({ code }) => {
   });
 };
 
-export const getNearShop = ({ latitude, longitude }) => {
+export const getNearShop = ({ latitude, longitude } = { NaN, NaN }) => {
   let url = "/ls-coupon/shop";
   if (!isNaN(latitude) && !isNaN(longitude)) {
     url += `?near=${latitude},${longitude}`;
