@@ -39,9 +39,9 @@ http.interceptor.response = response => {
 };
 
 // 轮播图
-export const banner = data => {
+export const getBanners = data => {
   return http.request({
-    url: "/banner/36kr",
+    url: "/ls-coupon/banner",
     method: "GET",
     data
     // handle:true
@@ -131,6 +131,5 @@ export const bindManager = ({ shopId, openid, nickname, displayName }) => {
 
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
-  test,
-  banner
+  test
 };

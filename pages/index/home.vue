@@ -2,8 +2,8 @@
   view.page
     home-header
     swiper.screen-swiper.square-dot.margin(indicator-dots circular autoplay interval='5000' duration='500')
-      swiper-item.swiper-item(v-for='(item,index) in swiperList' :key='index')
-        image(:src='item.url' mode='aspectFit' )
+      swiper-item.swiper-item(v-for='(item,index) in banners' :key='index' @click="goBannerDetail(item)")
+        image(:src='item.imageUrl' mode='aspectFit' )
     view.links.flex.justify-between
       view.link.margin-left(@click="currentTab = '优惠'")
         image(mode="aspectFit" :src="require('../../static/home_btn_shop_list.jpg')")
@@ -14,8 +14,8 @@
 
 <script>
 import { sync } from "vuex-pathify";
-
 import tkiQrcode from "tki-qrcode/components/tki-qrcode/tki-qrcode";
+import { getBanners } from "../../common/vmeitime-http";
 
 export default {
   components: {
@@ -39,14 +39,7 @@ export default {
           }
         }
       ],
-      swiperList: [
-        {
-          id: 0,
-          type: "image",
-          url:
-            "https://ls-coupon.codeispoetry.tech/wp-content/uploads/2019/07/中间Banner.jpg"
-        }
-      ]
+      banners: []
     };
   },
   computed: {
@@ -57,7 +50,17 @@ export default {
       if (item.action) {
         item.action();
       }
+    },
+    goBannerDetail(banner) {
+      if (banner.shopId) {
+        uni.navigateTo({ url: `/pages/store/index?shop=${banner.shopId}` });
+      } else if (banner.couponId) {
+        uni.navigateTo({ url: `/pages/store/index?coupon=${banner.couponId}` });
+      }
     }
+  },
+  async mounted() {
+    this.banners = (await getBanners()).data;
   }
 };
 </script>
