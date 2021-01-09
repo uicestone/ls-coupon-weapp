@@ -5,7 +5,7 @@
     view.flex-sub.flex.flex-direction.justify-between.padding-sm.padding-bottom-xs
       view.margin-right.flex.justify-start(style="white-space:pre-line") {{item.coupon.desc}}
       view.flex.justify-end
-        button.cu-btn.block.text-white.bg-green.btn-show-detail(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
+        button.cu-btn.block.text-white.bg-red.btn-show-detail(@click="goCouponDetail(item)" :disabled="item.used" v-if="showDetail" style="width:200upx") 
           text.text-df(v-if="!item.used") 查看详情
           text.text-white(v-else) 已使用
           image(mode="aspectFill" :src="buttonBg")

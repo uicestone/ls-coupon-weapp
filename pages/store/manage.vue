@@ -9,19 +9,19 @@
           text.cuIcon-search
           input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索门店' confirm-type='search')
         view.action(@click="search")
-          button.cu-btn.bg-green.shadow-blur.round 搜索
+          button.cu-btn.bg-red.shadow-blur.round 搜索
       view
         view.cu-list.menu.sm-border.card-menu.margin-top(v-if="_store.length || searchText" style="margin-bottom:200upx" )
           view.cu-item.padding(v-for="(item,index) in _store" :key="index" @click="selectStore(item)" :class="[form.shopId==item.id ? 'selected':'' ]")
             view(style="flex:1")
               image.logo(:src="require('../../static/logo.png')")
-            view(style="flex:6") 小肥羊{{item.name}}
+            view(style="flex:6") 东方既白{{item.name}}
             view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
         view(v-else)
             view.load-progress
               view.load-progress-spinner()
       view.flex.align-end.flex-sub.bind-button
-        button.cu-btn.lg.bg-green.flex-sub.margin(@click="bindManager")
+        button.cu-btn.lg.bg-red.flex-sub.margin(@click="bindManager")
           text.cuIcon-shop.text-white.margin-right-sm
           text 绑定
     view.flex.flex-direction(v-if="!isBindManager" style="height:calc(100vh - 100upx)")
@@ -39,7 +39,7 @@
               view 店员：{{ code.managerName }}
           view.padding-bottom-xl.padding-top-sm(style="width:100%") {{ code.coupon.desc }}
       view.flex.align-end.flex-sub
-        button.cu-btn.lg.bg-green.flex-sub.margin(@click="scanQrcode")
+        button.cu-btn.lg.bg-red.flex-sub.margin(@click="scanQrcode")
           text.cuIcon-scan.text-white.margin-right-sm
           text 扫码
 </template>

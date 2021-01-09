@@ -19,7 +19,7 @@
       view.cu-form-group
         view.title 城市
         input(placeholder="请填写 >" ).text-right
-      button.cu-btn.block.bg-green.margin-xl.lg(:disabled="loading" @click="updateUserProfile")
+      button.cu-btn.block.bg-red.margin-xl.lg(:disabled="loading" @click="updateUserProfile")
         text.icon-loading2.iconfont-spin(v-if="loading")
         text 保存
 </template>

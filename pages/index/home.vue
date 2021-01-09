@@ -67,7 +67,7 @@ export default {
 
 <style lang="stylus" scoped>
 .page
-  background-color #f0f0f0
+  background-color #ffffff
   min-height 100vh
 .screen-swiper
   border-radius 20upx
@@ -80,6 +80,7 @@ export default {
   margin-top 6vh
   .link
     image
+      border-radius 10upx
       width 326upx
       height 280upx
 .bottom

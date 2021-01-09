@@ -17,7 +17,7 @@
         view.cu-item.padding(v-for="(item,index) in detail.coupon.allShops ? allShops : detail.coupon.shops" :key="index")
           view(style="flex:1")
             image.logo(:src="require('../../static/logo.png')")
-          view(style="flex:6") 小肥羊{{item.name}}
+          view(style="flex:6") 东方既白{{item.name}}
           view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
 
 </template>

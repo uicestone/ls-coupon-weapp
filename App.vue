@@ -28,6 +28,6 @@ export default {
   width 100%
 .text-green
   color #2a6350
-.bg-green
-  background-color #2a6350
+.bg-red
+  background-color #dd452e
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
   view.top.flex.justify-center
-    image(mode="aspectFit" :src="require('../static/bg_home_top.jpg')")
+    image(mode="aspectFit" :src="require('../static/bg_home_top.png')")
     image.logo(:src="require('../static/logo.png')")
 </template>
 

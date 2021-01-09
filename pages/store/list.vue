@@ -9,13 +9,13 @@
         text.cuIcon-search
         input(v-model="searchText"  :adjust-position='false' type='text' placeholder='搜索门店' confirm-type='search')
       view.action(@click="search")
-        button.cu-btn.bg-green.shadow-blur.round 搜索
+        button.cu-btn.bg-red.shadow-blur.round 搜索
     view
       view.cu-list.menu.sm-border.card-menu.margin-top(v-if="_store.length || searchText" style="margin-bottom:130upx")
         view.cu-item.padding(v-for="(item,index) in _store" :key="index" @click="selectStore(item)")
           view(style="flex:1")
             image.logo(:src="require('../../static/logo.png')")
-          view(style="flex:6") 小肥羊{{item.name}}
+          view(style="flex:6") 东方既白{{item.name}}
           view.text-sm.text-grey.flex.adjust-end(v-if="item.distance" style="flex:1") {{item.distance}}km
       view(v-else)
           view.load-progress

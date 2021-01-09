@@ -28,7 +28,7 @@
       "path": "pages/user/index",
       "style": {
         "navigationBarTitleText": "",
-        "navigationBarBackgroundColor": ""
+        "navigationBarBackgroundColor": "#ca2631"
       }
     },
     {
@@ -53,8 +53,8 @@
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#2a6351",
-    "backgroundColor": "#2a6351"
+    "navigationBarBackgroundColor": "#dd452e",
+    "backgroundColor": "#dd452e"
   },
   "condition" : { //模式配置，仅开发期间生效
     "current": 1, //当前激活的模式(list 的索引项)
