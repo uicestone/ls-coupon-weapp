@@ -25,10 +25,14 @@ export default {
   },
   computed: {
     user: sync("auth/user"),
+    auth: sync("auth"),
     coupons: sync("auth/coupons")
   },
   mounted() {
     this.getCoupons();
+    if (!this.user.openid) {
+      this.auth.showLogin = true;
+    }
   },
   methods: {
     async getCoupons() {
