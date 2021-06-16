@@ -6,7 +6,8 @@
         view.padding-sm.shadow.bg-white
           qrcode(ref="qrcode" :val="detail.codeString", :size="200" :onval="true")
       view.cu-bar.bg-white.margin-top.padding-lr.radius
-        text.text-black 本券有效期：{{ detail.coupon.validFrom }} ~ {{ detail.coupon.validTill }}
+        text.text-black(v-if="detail.coupon.validFrom || detail.coupon.validTill") 本券有效期：{{ detail.coupon.validFrom }} ~ {{ detail.coupon.validTill }}
+        text.text-black(v-if="detail.expiresAt") 本券有效期：{{ detail.validFrom.substr(0,10) }} ~ {{ detail.expiresAt.substr(0,10) }}
     view
       view.cu-card.shadow.radius
         view.cu-item.content.padding
