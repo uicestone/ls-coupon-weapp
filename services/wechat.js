@@ -7,9 +7,12 @@ export const wechatLogin = () =>
     uni.showLoading();
     uni.login({
       provider,
-      success: loginRes => {
-        console.log(loginRes);
-        uni.getUserInfo({
+      success: async (loginRes) => {
+        const {data:user} = await api.wechatLogin({ code: loginRes.code });
+        uni.hideLoading()
+        handleLogin({user});
+        resolve();
+        /** uni.getUserInfo({
           provider,
           lang: "zh_CN",
           success: async userData => {
@@ -34,7 +37,7 @@ export const wechatLogin = () =>
             uni.hideLoading();
             reject(err);
           }
-        });
+        }); */
       },
       fail(err) {
         uni.hideLoading();

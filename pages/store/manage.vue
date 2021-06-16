@@ -33,10 +33,10 @@
           view.flex.justify-between.padding-top-xl(style="width:100%")
             view.flex.flex-direction
               view.code-string {{ code.codeString | codeStringLayout }}
-              view {{ code.customerNickname }}
+              view(v-if="code.customerNickname") {{ code.customerNickname }}
             view.flex.flex-direction
-              view {{ code.usedTime.substr(8,8) }}
-              view 店员：{{ code.managerName }}
+              view {{ code.usedTime }}
+              view 店员：{{ code.managerName || '未知' }}
           view.padding-bottom-xl.padding-top-sm(style="width:100%") {{ code.coupon.desc }}
       view.flex.align-end.flex-sub
         button.cu-btn.lg.bg-red.flex-sub.margin(@click="scanQrcode")
@@ -158,7 +158,7 @@ export default {
   color green
 .bind-button
   position fixed
-  bottom 80upx
+  bottom 110upx
   width 100%
   left 0
 .code-item

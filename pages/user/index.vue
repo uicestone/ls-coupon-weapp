@@ -4,9 +4,12 @@
       image(mode="aspectFill" :src="require('../../static/bg_user_top.jpg')")
     view.padding-lg(style="margin-top:70upx")
       view.text-white.flex
-        view.cu-avatar.round.xl(:style="[{ backgroundImage:'url(' +user.avatarUrl +')' }]")
+        //- view.cu-avatar.round.xl(:style="[{ backgroundImage:'url(' +user.avatarUrl +')' }]")
+        view.cu-avatar.round.xl(style="overflow: hidden;box-shadow: 0 0 15rpx 10rpx rgba(255,255,255,0.2)")
+          open-data(type="userAvatarUrl" style="height:100%")
         view.margin-left.flex.flex-direction.justify-between.padding-tb-xs
-          view.text-xxl {{user.nickName}}
+          //- view.text-xxl {{user.nickName}}
+          open-data.text-xxl(type="userNickName")
           view.padding-sm.cu-tag.round(style="background: rgba(0,0,0,0.2)")
             text {{coupons.length}} 张优惠券
       view(style="margin-top:80upx")
